@@ -1,0 +1,12 @@
+controller:
+  ingressClassResource:
+    name: external-nginx
+  service:
+    annotations:
+      service.beta.kubernetes.io/aws-load-balancer-backend-protocol: tcp
+      service.beta.kubernetes.io/aws-load-balancer-type: nlb
+  watchIngressWithoutClass: true
+  extraArgs:
+    ingress-class: ingress-nginx
+tcp:
+  5432: "postgresql/postgresql-master:5432"

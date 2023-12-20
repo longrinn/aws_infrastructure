@@ -1,0 +1,20 @@
+apiVersion: v1
+data:
+  mapRoles: |
+    - groups:
+      - system:bootstrappers
+      - system:nodes
+      rolearn: arn:aws:iam::315727832121:role/default-eks-node-group-20231120090111238000000001
+      username: system:node:{{EC2PrivateDNSName}}
+  mapUsers: |
+    - userarn: arn:aws:iam::315727832121:user/daniel.moscalu@endava.com
+      username: daniel.moscalu@endava.com
+      groups:
+        - system:masters
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2023-11-20T09:10:29Z"
+  name: aws-auth
+  namespace: kube-system
+  resourceVersion: "871"
+  uid: bd717be7-6725-4afc-8eea-eb11022a9ce0

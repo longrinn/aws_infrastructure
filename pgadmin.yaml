@@ -1,0 +1,37 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    appgw.ingress.kubernetes.io/health-probe-status-codes: 200-499
+    external-dns.alpha.kubernetes.io/hostname: postgres.app.mddinternship.com
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"networking.k8s.io/v1","kind":"Ingress","metadata":{"annotations":{"appgw.ingress.kubernetes.io/health-probe-status-codes":"200-499","external-dns.alpha.kubernetes.io/hostname":"postgres.app.mddinternship.com","nginx.ingress.kubernetes.io/whitelist-source-range":"10.0.0.0/8, 193.33.93.43/32"},"labels":{"app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"pgadmin4","app.kubernetes.io/version":"7.8","argocd.argoproj.io/instance":"pgadmin","helm.sh/chart":"pgadmin4-1.18.5"},"name":"pgadmin-pgadmin4","namespace":"pgadmin"},"spec":{"rules":[{"host":"postgres.app.mddinternship.com","http":{"paths":[{"backend":{"service":{"name":"pgadmin-pgadmin4","port":{"number":80}}},"path":"/","pathType":"Prefix"}]}}]}}
+    nginx.ingress.kubernetes.io/whitelist-source-range: 10.0.0.0/8, 193.33.93.43/32
+  creationTimestamp: "2023-11-20T11:44:24Z"
+  generation: 1
+  labels:
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: pgadmin4
+    app.kubernetes.io/version: "7.8"
+    argocd.argoproj.io/instance: pgadmin
+    helm.sh/chart: pgadmin4-1.18.5
+  name: pgadmin-pgadmin4
+  namespace: pgadmin
+  resourceVersion: "45142"
+  uid: 52763921-60b0-47ff-abbf-ad3bb485f01c
+spec:
+  rules:
+  - host: postgres.app.mddinternship.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: pgadmin-pgadmin4
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+status:
+  loadBalancer:
+    ingress:
+    - hostname: a90fec028f9674bce98379e5f2ab19df-fad6693bc9068c97.elb.eu-west-1.amazonaws.com

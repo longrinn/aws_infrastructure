@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    appgw.ingress.kubernetes.io/health-probe-status-codes: 200-499
+    # appgw.ingress.kubernetes.io/ssl-redirect: 'true'
+    # cert-manager.io/acme-challenge-type: http01
+    # cert-manager.io/cluster-issuer: cert-manager-global
+    external-dns.alpha.kubernetes.io/hostname: booksharing-be.app.mddinternship.com
+    nginx.ingress.kubernetes.io/whitelist-source-range: 193.33.93.43/32
+  labels:
+    app: test
+  name: test-ingres
+spec:
+  rules:
+    - host: parkinglot-be.app.mddinternship.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: parking-lot-be
+                port:
+                  number: 5000
+            path: /
+            pathType: Prefix
+  # tls:
+  #   - hosts:
+  #       - booksharing-be.app.mddinternship.com
+  #     secretName: booksharing-backend-db-tls

@@ -1,0 +1,18 @@
+server:
+  ingressClassName: ingress-nginx
+  ingress:
+    enabled: true
+    annotations:
+      appgw.ingress.kubernetes.io/health-probe-status-codes: 200-499
+      appgw.ingress.kubernetes.io/ssl-redirect: "true"
+      cert-manager.io/acme-challenge-type: http01
+      cert-manager.io/cluster-issuer: cert-manager-global
+    path: /
+    hosts:
+      - argocd.app.mddinternship.com
+    tls:
+      - secretName: wildcard-tls-secret
+        hosts:
+          - argocd.app.mddinternship.com
+  extraArgs:
+    - --insecure

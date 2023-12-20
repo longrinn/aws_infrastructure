@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+    name: postgres-ingress
+    # labels:
+       # app.kubernetes.io/component: primary
+    annotations:
+      kubernetes.io/ingress.class: ingress-nginx
+      nginx.ingress.kubernetes.io/whitelist-source-range: 193.33.93.43/32
+    namespace: postgresql
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: postgres.app.mddinternship.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: postgresql
+                port:
+                  number: 5432
